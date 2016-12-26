@@ -1,60 +1,36 @@
 {
-    "name": "yojson-actual",
-    "exportedEnvVars": {
-        "CAML_LD_LIBRARY_PATH": {
-            "global": true,
-            "resolveAsRelativePath": true,
-            "globalCollisionBehavior": "joinPath",
-            "val": "./_build/ocamlfind/lib/stublibs"
-        },
-        "FINDLIB": {
-            "global": true,
-            "resolveAsRelativePath": true,
-            "globalCollisionBehavior": "joinPath",
-            "val": "./_build/ocamlfind/lib"
-        },
-        "yojson_version": {
-            "global": true,
-            "globalCollisionBehavior": "clobber",
-            "val": "1.3.3"
-        },
-        "version": {
-            "global": true,
-            "globalCollisionBehavior": "clobber",
-            "val": "1.3.3"
-        },
-        "yojson_installed": {
-            "global": true,
-            "globalCollisionBehavior": "clobber",
-            "val": "true"
-        },
-        "yojson_enable": {
-            "global": true,
-            "globalCollisionBehavior": "clobber",
-            "val": "enable"
-        },
-        "PATH": {
-            "global": true,
-            "resolveAsRelativePath": true,
-            "globalCollisionBehavior": "joinPath",
-            "val": "./_build/ocamlfind/bin"
-        }
-    },
+    "name": "yojson",
     "version": "1.3.3",
     "dependencies": {
-        "@opam-alpha/easy-format": "*",
-        "@opam-alpha/biniou": ">= 1.0.6",
-        "@opam-alpha/ocamlfind": "*",
-        "dependency-env": "*",
-        "substs": "https://github.com/yunxing/substs.git",
-        "@opam-alpha/cppo": "*",
-        "nopam": "*",
-        "opam-installer-bin": "https://github.com/yunxing/opam-installer-bin.git"
+        "easy-format": "andreypopp/easy-format#esy",
+        "biniou": "andreypopp/biniou#esy",
+        "ocamlfind": "andreypopp/ocamlfind#esy",
+        "cppo": "andreypopp/cppo#esy",
+        "opam-installer-bin": "andreypopp/opam-installer-bin"
     },
-    "scripts": {
-        "postinstall": "eval $(dependencyEnv) && nopam && make && make install-lib && (opam-installer --prefix=$opam_prefix || true)"
+    "esy": {
+        "build": [
+            "make",
+            "make install-lib",
+            "(opam-installer --prefix=$cur__install || true)"
+        ],
+        "exportedEnv": {
+            "yojson_version": {
+                "scope": "global",
+                "globalCollisionBehavior": "clobber",
+                "val": "1.3.3"
+            },
+            "yojson_installed": {
+                "scope": "global",
+                "val": "true"
+            },
+            "yojson_enable": {
+                "scope": "global",
+                "val": "enable"
+            }
+        }
     },
     "peerDependencies": {
-        "@opam-alpha/ocaml": ">= 4.01.0"
+        "ocaml": "andreypopp/ocaml#esy"
     }
 }
